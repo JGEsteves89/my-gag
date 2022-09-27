@@ -46,16 +46,15 @@ html {
 	box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.75) !important;
 	min-height: 90vh;
 }
-
-.postAndCommentsContainer {
-	min-height: 80vh;
-}
-
 .flexContentCenter {
 	display: flex !important;
 	justify-content: center;
 	align-items: center;
 }
+.postAndCommentsContainer {
+	min-height: 80vh;
+}
+
 .postMedia {
 	padding-bottom: 1rem;
 }
@@ -77,4 +76,12 @@ html {
 .commentsList {
 	height: 100%;
 	overflow-y: auto;
+}
+@media only screen and (max-width: 595px) {
+	.postAndCommentsContainer {
+		flex-direction: column;
+	}
+	.commentsContainer {
+		max-width: 100% !important;
+	}
 }
