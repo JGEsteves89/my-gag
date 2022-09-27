@@ -1,0 +1,80 @@
+.App {
+	text-align: center;
+	background-color: #282c34;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+body,
+html {
+	background-color: #282c34;
+	color: rgba(255, 255, 255, 0.691);
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.postContainer {
+	background-color: #131519 !important;
+	margin: 1rem;
+	box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.75) !important;
+	min-height: 90vh;
+}
+
+.postAndCommentsContainer {
+	min-height: 80vh;
+}
+
+.flexContentCenter {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+}
+.postMedia {
+	padding-bottom: 1rem;
+}
+.title {
+	margin-block: 1rem !important;
+}
+
+.MuiListItemText-primary {
+	color: rgba(255, 255, 255, 0.691) !important;
+}
+.MuiListItemText-secondary {
+	color: rgba(255, 255, 255, 0.5) !important;
+}
+.commentsContainer {
+	max-width: 35% !important;
+	max-height: 80vh;
+	align-self: flex-start;
+}
+.commentsList {
+	height: 100%;
+	overflow-y: auto;
+}
