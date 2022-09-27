@@ -2,58 +2,80 @@ import { useState, useEffect } from 'react';
 import {
 	CssBaseline,
 	AppBar,
-	Container,
 	Typography,
 	Button,
-	listItemTextClasses,
+	Skeleton,
+	Box,
 } from '@mui/material';
-import Post from './Post.js';
 
+import Post from './Post.js';
+import fetchFilterData from './dataFilter.js';
+import { useSeenPosts } from './postsSeen.js';
 import './App.css';
 
 function App() {
 	const [data, setData] = useState(null);
-	const [next, setNext] = useState('');
+	const [currentPost, setCurrentPost] = useState(0);
+	const [seenPosts, addPostSeen, clearPostsSeen] = useSeenPosts();
 
 	useEffect(() => {
-		getData();
-	}, [next]);
+		fetchFilterData(data, currentPost, seenPosts).then((res) => {
+			if (res.needsRefresh) {
+				setData(res.data);
+			}
+		});
+	});
 
-	function getData(nextCursor) {
-		console.log('🚨:App:8', 'Fetching data...');
-		let url = 'http://localhost:8081/';
-		if (nextCursor) {
-			url += '?' + nextCursor;
+	function getNextPost() {
+		if (currentPost < data.posts.length - 1) {
+			setCurrentPost(currentPost + 1);
 		}
+	}
 
-		console.log('🚨:App:20', 'url', url);
-		fetch(url)
-			.then((res) => res.json())
-			.then((data) => {
-				console.log('🚨:App:22', 'data', data);
-				return setData(data);
-			})
-			.then(() => window.scrollTo(0, 0));
+	function getPreviousPost() {
+		if (currentPost !== 0) {
+			setCurrentPost(currentPost - 1);
+		}
+	}
+
+	if (data && data.posts) {
+		addPostSeen(data.posts[currentPost].id);
 	}
 
 	return (
 		<div className="App">
 			<CssBaseline />
 			<AppBar position="sticky">
-				<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-					MyGag
-				</Typography>
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}>
+					<Button
+						variant="contained"
+						sx={{ flexGrow: 2, margin: '0.2rem' }}
+						onClick={getPreviousPost}>
+						👈
+					</Button>
+					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+						MyGag
+					</Typography>
+					<Button
+						variant="contained"
+						sx={{ flexGrow: 2, margin: '0.2rem' }}
+						onClick={getNextPost}>
+						👉
+					</Button>
+				</Box>
 			</AppBar>
-			<Container maxWidth="lg">
-				{data && (
-					<ul>
-						{data.posts.map((post) => {
-							return <Post key={post.id} post={post} />;
-						})}
-					</ul>
-				)}
-			</Container>
-			<Button onClick={() => getData(data.nextCursor)}>GIMME MORE</Button>
+			<Box className="singlePostView">
+				{data && currentPost !== -1 && <Post post={data.posts[currentPost]} />}
+				{!data && <Skeleton variant="rectangular" className="postContainer" />}
+			</Box>
+			<Button size="small" onClick={() => clearPostsSeen}>
+				ClearCookies
+			</Button>
 		</div>
 	);
 }

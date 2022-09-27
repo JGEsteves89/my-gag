@@ -8,12 +8,12 @@ import {
 	ListItemAvatar,
 	Avatar,
 	ListItemText,
+	Box,
 } from '@mui/material';
 import ReactPlayer from 'react-player/file';
-import { UseOnScreen } from './useOnScreen';
+
 function Post(props) {
 	const ref = useRef(null);
-	const isInView = UseOnScreen(ref);
 	const post = props.post;
 
 	return (
@@ -27,7 +27,9 @@ function Post(props) {
 					{post.title}
 				</Typography>
 			</Container>
-			<Container className="flexContentCenter">
+			<Box
+				maxWidth="95%"
+				className="postAndCommentsContainer flexContentCenter">
 				<Container ref={ref} className="postMedia flexContentCenter">
 					{post.images.image460sv && (
 						<ReactPlayer
@@ -36,8 +38,8 @@ function Post(props) {
 									src: post.images.image460sv.url,
 								},
 							]}
-							playing={isInView}
-							height={post.images.image460sv.height}
+							playing={true}
+							height="80vh"
 							controls={true}
 							muted={false}
 						/>
@@ -51,11 +53,11 @@ function Post(props) {
 						/>
 					)}
 				</Container>
-				<Container
+				<Box
 					className="commentsContainer"
 					style={{
-						maxHeight: post.images.image700.height,
 						overflow: 'auto',
+						minHeight: '75vh',
 					}}>
 					<List className="commentsList">
 						{post.comments.comments.map((comment) => {
@@ -100,6 +102,7 @@ function Post(props) {
 												comment.media[0].imageMetaByType &&
 												comment.media[0].imageMetaByType.image && (
 													<img
+														alt={comment.user.displayName}
 														style={{
 															width: '100%',
 															height: 'auto',
@@ -112,8 +115,8 @@ function Post(props) {
 							);
 						})}
 					</List>
-				</Container>
-			</Container>
+				</Box>
+			</Box>
 		</Paper>
 	);
 }
