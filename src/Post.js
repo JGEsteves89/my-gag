@@ -40,7 +40,8 @@ function Post(props) {
 								},
 							]}
 							playing={true}
-							height="80vh"
+							loop={true}
+							width="100%"
 							controls={true}
 							muted={false}
 						/>

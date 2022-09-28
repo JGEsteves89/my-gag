@@ -72,6 +72,7 @@ html {
 	max-width: 35% !important;
 	max-height: 80vh;
 	align-self: flex-start;
+	background-color: #282c349a;
 }
 .commentsList {
 	height: 100%;
@@ -80,9 +81,16 @@ html {
 @media only screen and (max-width: 595px) {
 	.postAndCommentsContainer {
 		flex-direction: column;
+		max-width: 100% !important;
+		margin: 0;
+		min-height: auto;
 	}
 	.commentsContainer {
 		max-width: 100% !important;
+
 		max-height: auto;
+	}
+	video,
+	.postMedia {
 	}
 }
