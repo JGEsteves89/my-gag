@@ -7,7 +7,7 @@ import {
 	Skeleton,
 	Box,
 } from '@mui/material';
-
+import { useSwipeable } from 'react-swipeable';
 import Post from './Post.js';
 import fetchFilterData from './dataFilter.js';
 import { useSeenPosts } from './postsSeen.js';
@@ -17,6 +17,10 @@ function App() {
 	const [data, setData] = useState(null);
 	const [currentPost, setCurrentPost] = useState(0);
 	const [seenPosts, addPostSeen, clearPostsSeen] = useSeenPosts();
+	const swipeable = useSwipeable({
+		onSwipedLeft: getNextPost,
+		onSwipedRight: getPreviousPost,
+	});
 
 	useEffect(() => {
 		fetchFilterData(data, currentPost, seenPosts).then((res) => {
@@ -43,7 +47,7 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<div className="App" {...swipeable}>
 			<CssBaseline />
 			<AppBar position="sticky">
 				<Box

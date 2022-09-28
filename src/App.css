@@ -83,5 +83,6 @@ html {
 	}
 	.commentsContainer {
 		max-width: 100% !important;
+		max-height: auto;
 	}
 }

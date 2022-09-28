@@ -33,6 +33,7 @@ function Post(props) {
 				<Container ref={ref} className="postMedia flexContentCenter">
 					{post.images.image460sv && (
 						<ReactPlayer
+							playsinline={true}
 							url={[
 								{
 									src: post.images.image460sv.url,
@@ -82,17 +83,13 @@ function Post(props) {
 											comment.media[0].imageMetaByType &&
 											comment.media[0].imageMetaByType.video && (
 												<ReactPlayer
+													playsinline={true}
 													url={[
 														{
 															src: comment.media[0].imageMetaByType.video.url,
 														},
 													]}
-													width={
-														comment.media[0].imageMetaByType.video.width / 2
-													}
-													height={
-														comment.media[0].imageMetaByType.video.height / 2
-													}
+													width={'100%'}
 													controls={true}
 													muted={true}
 												/>
