@@ -62,7 +62,7 @@ function App() {
 						👈
 					</Button>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						MyGag.3
+						MyGag.4
 					</Typography>
 					<Button variant="contained" sx={{ flexGrow: 2, margin: '0.2rem' }} onClick={getNextPost}>
 						👉

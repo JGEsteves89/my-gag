@@ -18,7 +18,7 @@ function Post(props) {
 					{post.images.image460sv && (
 						<ReactPlayer
 							style={{
-								marginBottom: '10rem',
+								marginBottom: '12rem',
 							}}
 							playsinline={true}
 							url={[
