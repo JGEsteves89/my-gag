@@ -1,15 +1,5 @@
-import { useRef } from 'react';
-import {
-	Paper,
-	Container,
-	Typography,
-	List,
-	ListItem,
-	ListItemAvatar,
-	Avatar,
-	ListItemText,
-	Box,
-} from '@mui/material';
+import { useRef, useEffect } from 'react';
+import { Paper, Container, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText, Box } from '@mui/material';
 import ReactPlayer from 'react-player/file';
 
 function Post(props) {
@@ -19,20 +9,17 @@ function Post(props) {
 	return (
 		<Paper className="postContainer">
 			<Container className=" flexContentCenter">
-				<Typography
-					variant="h5"
-					className="title"
-					component="div"
-					sx={{ flexGrow: 1, color: 'white' }}>
+				<Typography variant="h5" className="title" component="div" sx={{ flexGrow: 1, color: 'white' }}>
 					{post.title}
 				</Typography>
 			</Container>
-			<Box
-				maxWidth="95%"
-				className="postAndCommentsContainer flexContentCenter">
+			<Box maxWidth="99%" className="postAndCommentsContainer flexContentCenter">
 				<Container ref={ref} className="postMedia flexContentCenter">
 					{post.images.image460sv && (
 						<ReactPlayer
+							style={{
+								marginBottom: '8rem',
+							}}
 							playsinline={true}
 							url={[
 								{
@@ -46,14 +33,7 @@ function Post(props) {
 							muted={false}
 						/>
 					)}
-					{!post.images.image460sv && (
-						<img
-							src={post.images.image700.webpUrl}
-							alt={post.title}
-							width="100%"
-							loading="lazy"
-						/>
-					)}
+					{!post.images.image460sv && <img src={post.images.image700.webpUrl} alt={post.title} width="100%" loading="lazy" />}
 				</Container>
 				<Box
 					className="commentsContainer"
@@ -69,16 +49,10 @@ function Post(props) {
 							return (
 								<ListItem key={comment.commentId} alignItems="flex-start">
 									<ListItemAvatar>
-										<Avatar
-											alt={comment.user.displayName}
-											src={comment.user.avatarUrl}
-										/>
+										<Avatar alt={comment.user.displayName} src={comment.user.avatarUrl} />
 									</ListItemAvatar>
 									<Container className="flexContainer">
-										<ListItemText
-											primary={comment.text}
-											secondary={comment.user.displayName}
-										/>
+										<ListItemText primary={comment.text} secondary={comment.user.displayName} />
 										{(comment.media &&
 											comment.media[0] &&
 											comment.media[0].imageMetaByType &&

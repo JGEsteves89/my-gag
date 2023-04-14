@@ -1,12 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-	CssBaseline,
-	AppBar,
-	Typography,
-	Button,
-	Skeleton,
-	Box,
-} from '@mui/material';
+import { CssBaseline, AppBar, Typography, Button, Skeleton, Box } from '@mui/material';
 import { useSwipeable } from 'react-swipeable';
 import Post from './Post.js';
 import fetchFilterData from './dataFilter.js';
@@ -18,9 +11,18 @@ function App() {
 	const [currentPost, setCurrentPost] = useState(0);
 	const [seenPosts, addPostSeen, clearPostsSeen] = useSeenPosts();
 	const swipeable = useSwipeable({
+		delta: 100, // min distance(px) before a swipe starts. *See Notes*
+		swipeDuration: 500,
+		trackTouch: true, // track touch input
+		trackMouse: false, // track mouse input
 		onSwipedLeft: getNextPost,
 		onSwipedRight: getPreviousPost,
 	});
+
+	useEffect(() => {
+		console.log('Scrolling up...');
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	}, [currentPost]);
 
 	useEffect(() => {
 		fetchFilterData(data, currentPost, seenPosts).then((res) => {
@@ -56,19 +58,13 @@ function App() {
 						justifyContent: 'space-between',
 						alignItems: 'center',
 					}}>
-					<Button
-						variant="contained"
-						sx={{ flexGrow: 2, margin: '0.2rem' }}
-						onClick={getPreviousPost}>
+					<Button variant="contained" sx={{ flexGrow: 2, margin: '0.2rem' }} onClick={getPreviousPost}>
 						👈
 					</Button>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 						MyGag
 					</Typography>
-					<Button
-						variant="contained"
-						sx={{ flexGrow: 2, margin: '0.2rem' }}
-						onClick={getNextPost}>
+					<Button variant="contained" sx={{ flexGrow: 2, margin: '0.2rem' }} onClick={getNextPost}>
 						👉
 					</Button>
 				</Box>

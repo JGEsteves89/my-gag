@@ -42,7 +42,7 @@ html {
 
 .postContainer {
 	background-color: #131519 !important;
-	margin: 1rem;
+	margin: 0rem;
 	box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.75) !important;
 	min-height: 90vh;
 }
@@ -57,6 +57,8 @@ html {
 
 .postMedia {
 	padding-bottom: 1rem;
+	padding-inline: 0rem !important;
+	margin-inline: 0rem;
 }
 .title {
 	margin-block: 1rem !important;
@@ -87,10 +89,11 @@ html {
 	}
 	.commentsContainer {
 		max-width: 100% !important;
-
 		max-height: auto;
 	}
-	video,
+	video {
+		min-height: 70vh;
+	}
 	.postMedia {
 	}
 }
