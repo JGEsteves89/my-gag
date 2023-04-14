@@ -11,7 +11,7 @@ function App() {
 	const [currentPost, setCurrentPost] = useState(0);
 	const [seenPosts, addPostSeen, clearPostsSeen] = useSeenPosts();
 	const swipeable = useSwipeable({
-		delta: 100, // min distance(px) before a swipe starts. *See Notes*
+		delta: 50, // min distance(px) before a swipe starts. *See Notes*
 		swipeDuration: 500,
 		trackTouch: true, // track touch input
 		trackMouse: false, // track mouse input
@@ -62,7 +62,7 @@ function App() {
 						👈
 					</Button>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						MyGag
+						MyGag.3
 					</Typography>
 					<Button variant="contained" sx={{ flexGrow: 2, margin: '0.2rem' }} onClick={getNextPost}>
 						👉
